@@ -1,15 +1,17 @@
 extends Area2D
 
 var entered = false
-@onready var camera_2d_2: Camera2D = $"../Player/Camera2D2"
+@onready var camera_2d_2: Camera2D = $"../Y sort/Player/Camera2D2"
 @export var target_scene: String = "res://scenes/guild.tscn"
-@export var spawn_offset: Vector2 = Vector2(580, 620)
+@export var spawn_offset: Vector2 = Vector2(590, 635)
 @onready var fade_rect: ColorRect = ColorRect.new()
-@onready var player: CharacterBody2D = $"../Player"
+@onready var player: CharacterBody2D = $"../Y sort/Player"
+
 func _ready():
-	# Connect signals
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+	if not body_exited.is_connected(_on_body_exited):
+		body_exited.connect(_on_body_exited)
 	
 	# Create CanvasLayer for full-screen fade
 	var canvas_layer = CanvasLayer.new()
@@ -23,27 +25,19 @@ func _ready():
 	fade_rect.modulate.a = 0.0
 	canvas_layer.add_child(fade_rect)
 
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	entered = true
-	print("Enter")
+func _on_body_entered(body: Node2D) -> void:
+	if body is PhysicsBody2D:
+		entered = true
 
-func _on_body_exited(body: PhysicsBody2D) -> void:
-	entered = false
-	print("Exit")
+func _on_body_exited(body: Node2D) -> void:
+	if body is PhysicsBody2D:
+		entered = false
 
 func _physics_process(_delta):
 	if entered and Input.is_action_just_pressed("enter"):
-		print("PRESSED ENTER")
 		zoom_transition_and_change_scene()
 
 func zoom_transition_and_change_scene():
-	if not camera_2d_2:
-		print("No camera found!")
-		return
-	
-
-
-
 	# 1. ZOOM toward PLAYER (not door)
 	var tween = create_tween()
 	tween.set_parallel()

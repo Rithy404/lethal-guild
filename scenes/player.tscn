@@ -674,7 +674,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smehm"]
-size = Vector2(5, 10.000004)
+size = Vector2(5, 9.000004)
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -687,5 +687,6 @@ sprite_frames = SubResource("SpriteFrames_nubpm")
 animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.5, -4.999998)
+position = Vector2(3.5, -4.499998)
 shape = SubResource("RectangleShape2D_smehm")
+disabled = true

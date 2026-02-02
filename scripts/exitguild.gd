@@ -7,11 +7,6 @@ var entered = false
 @onready var camera_2d: Camera2D = $"../Ysort/Player/Camera2D"
 
 func _ready():
-	if not body_entered.is_connected(_on_body_entered):
-		body_entered.connect(_on_body_entered)
-	if not body_exited.is_connected(_on_body_exited):
-		body_exited.connect(_on_body_exited)
-	
 	var canvas_layer = CanvasLayer.new()
 	add_child(canvas_layer)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://55aw85610qti"]
+[gd_scene load_steps=40 format=4 uid="uid://55aw85610qti"]
 
 [ext_resource type="Texture2D" uid="uid://dfq40em8614mv" path="res://assets/Map/OLD SHOP/old shop tile_v1.png" id="1_d2yr8"]
 [ext_resource type="Texture2D" uid="uid://dhmxu1ua1sria" path="res://assets/Map/Pixel_16_interiors_v2_free/tiles and items.png" id="1_pl6gq"]
@@ -1928,7 +1928,8 @@ texture = ExtResource("5_0h3y4")
 3:0/size_in_atlas = Vector2i(6, 2)
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 8)
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-47.84243, -23.381634, 47.842422, -23.381634, 48.38199, 1.4388695, -47.84243, 1.978447)
+3:0/0/y_sort_origin = -25
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48.20214, -24.10107, 48.022278, -23.741352, 47.66255, 7.5540657, -48.382004, 8.4533615)
 3:2/size_in_atlas = Vector2i(4, 2)
 3:2/0 = 0
 3:2/0/texture_origin = Vector2i(0, 8)
@@ -1981,6 +1982,9 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2yr8"]
+size = Vector2(5.0001907, 4.347805)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mn20d"]
 texture = ExtResource("4_j6b86")
@@ -2170,7 +2174,7 @@ y_sort_enabled = true
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="Ysort"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAdACIAAgAIAAYAAAAsACYAAgAKAAYAAAAuACYAAgAKAAYAAAAbACYAAgAKAAYAAAAdACYAAgAKAAYAAAAbACIAAgAIAAYAAAAlACYAAgAFAAUAAAAqAB4AAgAGAAAAAAArAB4AAgAHAAAAAAArAB8AAgAHAAEAAAAqAB8AAgAGAAEAAAAvAB0AAQAKAAwAAAAaAB0AAQAKAAwAAAAlAB8AAwAFAAkAAAAkACEAAwAJAAAAAAAmACEAAwAJAAAAAAAZACAAAwABAAYAAAAZACEAAwABAAcAAAAZACIAAwABAAgAAAAZACMAAwABAAkAAAAcAB8AAwAFAAkAAAAZAB4AAwABAAQAAAAZAB8AAwABAAUAAAAfAB4AAgAGAAAAAAAfAB8AAgAGAAEAAAAgAB4AAgAHAAAAAAAgAB8AAgAHAAEAAAAvACAAAwADAAoAAAAwAB8AAwACAAoAAAAwACAAAwACAAsAAAAuAB8AAwACAAoAAAAuACAAAwACAAsAAAAsACIAAgAIAAYAAAAuACIAAgAIAAYAAAA=")
+tile_map_data = PackedByteArray("AAAdACIAAgAIAAYAAAAsACYAAgAKAAYAAAAuACYAAgAKAAYAAAAbACYAAgAKAAYAAAAdACYAAgAKAAYAAAAbACIAAgAIAAYAAAAlACYAAgAFAAUAAAAqAB4AAgAGAAAAAAArAB4AAgAHAAAAAAArAB8AAgAHAAEAAAAqAB8AAgAGAAEAAAAvAB0AAQAKAAwAAAAaAB0AAQAKAAwAAAAlAB8AAwAFAAkAAAAZACAAAwABAAYAAAAZACEAAwABAAcAAAAZACIAAwABAAgAAAAZACMAAwABAAkAAAAcAB8AAwAFAAkAAAAZAB4AAwABAAQAAAAZAB8AAwABAAUAAAAfAB4AAgAGAAAAAAAfAB8AAgAGAAEAAAAgAB4AAgAHAAAAAAAgAB8AAgAHAAEAAAAvACAAAwADAAoAAAAwAB8AAwACAAoAAAAwACAAAwACAAsAAAAuAB8AAwACAAoAAAAuACAAAwACAAsAAAAsACIAAgAIAAYAAAAuACIAAgAIAAYAAAA=")
 tile_set = SubResource("TileSet_kjqvi")
 
 [node name="Emily" type="CharacterBody2D" parent="Ysort"]
@@ -2190,6 +2194,7 @@ tile_map_data = PackedByteArray("AAAsACMAAAAMAAgAAAAsACQAAAAMAAkAAAAsACUAAAAMAAo
 tile_set = SubResource("TileSet_442xa")
 
 [node name="Jenny" type="CharacterBody2D" parent="Ysort"]
+y_sort_enabled = true
 position = Vector2(601.00006, 521)
 scale = Vector2(1.8399804, 1.8000196)
 script = ExtResource("3_j6b86")
@@ -2216,6 +2221,11 @@ limit_top = 455
 limit_right = 784
 limit_bottom = 639
 limit_smoothed = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ysort/Player"]
+position = Vector2(3.610962, -2.1738892)
+scale = Vector2(0.9999996, 0.9999997)
+shape = SubResource("RectangleShape2D_d2yr8")
 
 [node name="TileMapLayer4" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAbACQAAAAPAAYAAAAdACQAAAAPAAYAAAAsACQAAAAPAAYAAAAuACQAAAAPAAYAAAAbACMAAAAGAAoAAAAcACQAAAAHAAoAAAA=")

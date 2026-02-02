@@ -1,4 +1,23 @@
-[gd_scene load_steps=0 format=3 uid="uid://ypw8wrqnubx5"]
+[gd_scene load_steps=6 format=3 uid="uid://ypw8wrqnubx5"]
+
+[ext_resource type="Texture2D" uid="uid://4qye73d6lig1" path="res://assets/UI/Screenshot 2026-02-02 222811.png" id="1_ekxnf"]
+[ext_resource type="FontFile" uid="uid://p6xjbd8jiyy4" path="res://assets/UI/ThaleahFat.ttf" id="2_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bkfxdxefbxhhi" path="res://assets/UI/sign.png" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://clslbet54ccqs" path="res://scripts/startbutton.gd" id="3_wu84c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.011764706, 0.30980393, 0.07450981, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.007843138, 0.25490198, 0.05490196, 1)
+shadow_size = 3
+shadow_offset = Vector2(0, 5)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +26,93 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0.35906908, 0.35906908, 0.35906908, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ekxnf")
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -300.0
+offset_right = 251.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="Start" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqqt6")
+text = "Start Game :)"
+script = ExtResource("3_wu84c")
+
+[node name="Setting" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqqt6")
+text = "Setting :I"
+
+[node name="Exit" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqqt6")
+text = "Exit :("
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0.6872149, 0.68721503, 0.6872149, 1)
+anchors_preset = -1
+anchor_left = 0.527
+anchor_top = 0.349
+anchor_right = 0.527
+anchor_bottom = 0.349
+offset_left = -298.104
+offset_top = -90.15201
+offset_right = 297.896
+offset_bottom = 89.84799
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bqqt6")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.5
+offset_top = -135.0
+offset_right = 248.5
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.07370088, 0.9827481, 0.3091017, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_font_sizes/font_size = 80
+text = "Lethal Guild"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Start" to="CanvasLayer/VBoxContainer/Start" method="_on_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dysh644negkeq"]
+[gd_scene load_steps=35 format=4 uid="uid://dysh644negkeq"]
 
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://couy0dxkwgxnj" path="res://assets/Map/pixel_16_woods v2 free/free_pixel_16_woods.png" id="1_yqjtg"]
@@ -1602,6 +1602,9 @@ texture = ExtResource("3_lnu2h")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_u5sy4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(5, 9)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vtaks"]
 texture = ExtResource("3_lnu2h")
 0:0/0 = 0
@@ -1919,6 +1922,10 @@ limit_top = 130
 limit_right = 370
 limit_bottom = 400
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Y sort/Player"]
+position = Vector2(3.5, -4.5)
+shape = SubResource("RectangleShape2D_u5sy4")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="Y sort"]
 visible = false
 tile_set = SubResource("TileSet_kvpfn")
@@ -1958,7 +1965,7 @@ shape = SubResource("RectangleShape2D_gee14")
 scale = Vector2(0.47999704, 0.44000733)
 sprite_frames = SubResource("SpriteFrames_ir15t")
 animation = &"idle"
-frame_progress = 0.15855482
+frame_progress = 0.069708146
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

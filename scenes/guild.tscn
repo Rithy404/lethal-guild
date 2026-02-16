@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://55aw85610qti"]
+[gd_scene load_steps=43 format=4 uid="uid://55aw85610qti"]
 
 [ext_resource type="Texture2D" uid="uid://dfq40em8614mv" path="res://assets/Map/OLD SHOP/old shop tile_v1.png" id="1_d2yr8"]
 [ext_resource type="Texture2D" uid="uid://dhmxu1ua1sria" path="res://assets/Map/Pixel_16_interiors_v2_free/tiles and items.png" id="1_pl6gq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://3lhmsj3k1eb7" path="res://assets/Character/NPC/Female1.png" id="6_0h3y4"]
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="6_0lpxy"]
 [ext_resource type="Script" uid="uid://bobnhj5et6m8p" path="res://scripts/exitguild.gd" id="7_j6b86"]
+[ext_resource type="AudioStream" uid="uid://c124876gorlhb" path="res://assets/Music/deuslower-medieval-ambient-236809.mp3" id="11_kjqvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_442xa"]
 texture = ExtResource("1_d2yr8")
@@ -1024,7 +1025,9 @@ texture = ExtResource("4_j6b86")
 4:0/0 = 0
 5:0/0 = 0
 6:0/0 = 0
+6:0/0/y_sort_origin = -27
 7:0/0 = 0
+7:0/0/y_sort_origin = -27
 8:0/0 = 0
 9:0/0 = 0
 10:0/0 = 0
@@ -1040,7 +1043,9 @@ texture = ExtResource("4_j6b86")
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
+6:1/0/y_sort_origin = -27
 7:1/0 = 0
+7:1/0/y_sort_origin = -27
 8:1/0 = 0
 9:1/0 = 0
 10:1/0 = 0
@@ -1328,12 +1333,14 @@ texture = ExtResource("5_0h3y4")
 1:10/0 = 0
 1:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:10/0 = 0
+2:10/0/y_sort_origin = -27
 2:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:11/0 = 0
 0:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:11/0 = 0
 1:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:11/0 = 0
+2:11/0/y_sort_origin = -27
 2:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:12/0 = 0
 7:12/0 = 0
@@ -1364,6 +1371,7 @@ texture = ExtResource("5_0h3y4")
 3:10/size_in_atlas = Vector2i(2, 2)
 3:10/0 = 0
 3:10/0/texture_origin = Vector2i(0, 9)
+3:10/0/y_sort_origin = -25
 3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9.352661, -24.280928, 10.431808, -24.280928, 14.568558, -6.4749146, 9.532501, -4.3166084, 9.532501, 6.4749146, -8, 6.6547737, -8, -4.6763268, -14.388702, -7.5540657)
 5:9/size_in_atlas = Vector2i(5, 3)
 5:9/0 = 0
@@ -1385,15 +1393,34 @@ size = Vector2(3, 5)
 atlas = ExtResource("4_0h3y4")
 region = Rect2(0, 0, 16, 34)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_85pb6"]
+atlas = ExtResource("4_0h3y4")
+region = Rect2(32, 256, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_442xa"]
+atlas = ExtResource("4_0h3y4")
+region = Rect2(48, 256, 16, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kjqvi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0lpxy")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85pb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_442xa")
+}],
+"loop": true,
+"name": &"wave",
+"speed": 4.0
 }]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85pb6"]
@@ -1499,7 +1526,9 @@ texture = ExtResource("4_j6b86")
 10:6/0 = 0
 11:6/0 = 0
 12:6/0 = 0
+12:6/0/y_sort_origin = -27
 13:6/0 = 0
+13:6/0/y_sort_origin = -27
 14:6/0 = 0
 15:6/0 = 0
 0:7/0 = 0
@@ -1515,7 +1544,9 @@ texture = ExtResource("4_j6b86")
 10:7/0 = 0
 11:7/0 = 0
 12:7/0 = 0
+12:7/0/y_sort_origin = -27
 13:7/0 = 0
+13:7/0/y_sort_origin = -27
 14:7/0 = 0
 14:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:7/0 = 0
@@ -1530,10 +1561,13 @@ texture = ExtResource("4_j6b86")
 8:8/0 = 0
 9:8/0 = 0
 12:8/0 = 0
+12:8/0/y_sort_origin = -27
 12:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.71943474, 8, 0.5395775, 8, 8, -8, 8)
 13:8/0 = 0
+13:8/0/y_sort_origin = -27
 13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.71943474, 8, 0.5395775, 8, 8, -8, 8)
 14:8/0 = 0
+14:8/0/y_sort_origin = -27
 14:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0.71943474, 8, 0.5395775, 8, 8, -8, 8)
 15:8/0 = 0
 0:9/0 = 0
@@ -1547,10 +1581,13 @@ texture = ExtResource("4_j6b86")
 8:9/0 = 0
 9:9/0 = 0
 12:9/0 = 0
+12:9/0/y_sort_origin = -27
 12:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:9/0 = 0
+13:9/0/y_sort_origin = -27
 13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:9/0 = 0
+14:9/0/y_sort_origin = -27
 14:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:9/0 = 0
 3:10/0 = 0
@@ -1560,10 +1597,13 @@ texture = ExtResource("4_j6b86")
 8:10/0 = 0
 9:10/0 = 0
 12:10/0 = 0
+12:10/0/y_sort_origin = -27
 12:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:10/0 = 0
+13:10/0/y_sort_origin = -27
 13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:10/0 = 0
+14:10/0/y_sort_origin = -27
 14:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:10/0 = 0
 10:8/size_in_atlas = Vector2i(2, 3)
@@ -2157,7 +2197,7 @@ texture = ExtResource("4_j6b86")
 sources/0 = SubResource("TileSetAtlasSource_mn20d")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h3y4"]
-size = Vector2(44, 44)
+size = Vector2(44, 24)
 
 [node name="Guild" type="Node2D"]
 
@@ -2179,7 +2219,7 @@ tile_set = SubResource("TileSet_kjqvi")
 
 [node name="Emily" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(601, 522)
-scale = Vector2(1.1585674, 0.88002944)
+scale = Vector2(0.99856746, 0.80002946)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Emily"]
 position = Vector2(0, 3)
@@ -2187,6 +2227,7 @@ shape = SubResource("RectangleShape2D_kjqvi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Emily"]
 sprite_frames = SubResource("SpriteFrames_kjqvi")
+animation = &"wave"
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="Ysort"]
 y_sort_enabled = true
@@ -2236,8 +2277,13 @@ position = Vector2(595, 608)
 script = ExtResource("7_j6b86")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 8)
+position = Vector2(5, 18)
 shape = SubResource("RectangleShape2D_0h3y4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_kjqvi")
+volume_db = -2.6
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

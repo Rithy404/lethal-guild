@@ -5,7 +5,7 @@ const SPEED = 67.0
 
 var last_dir = Vector2.ZERO   # stores the last direction faced
 var is_attacking = false
-
+var can_move = true
 func _ready():
 	add_to_group("player")
 	animated_sprite.animation_finished.connect(_on_animation_finished)
@@ -15,7 +15,7 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	if is_attacking:
+	if is_attacking or not can_move:
 		return  # Skip movement and input during attack
 
 	var x := Input.get_axis("move_left", "move_right")

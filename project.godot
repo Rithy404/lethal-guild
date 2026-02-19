@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 
+[global_group]
+
+test_dummy=""
+
 [input]
 
 move_left={

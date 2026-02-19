@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnfhf3pxskwn1"]
+
+[ext_resource type="Script" uid="uid://bt3ugb1gsr5wc" path="res://scripts/dialog.gd" id="1_kxkgd"]
+[ext_resource type="Texture2D" uid="uid://cbnpe4qt6ugnc" path="res://assets/UI/dialogborder.png" id="2_v0qdq"]
+[ext_resource type="FontFile" uid="uid://cp8twwoye0810" path="res://assets/UI/monogram.ttf" id="4_kdl02"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfgu0"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_srukh"]
+font = ExtResource("4_kdl02")
+outline_size = 4
+outline_color = Color(1.92523e-06, 0, 0.63714826, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_86vqb"]
+line_spacing = 2.0
+font = ExtResource("4_kdl02")
+font_size = 32
+
+[node name="DialogBox" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_kxkgd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 134.0
+offset_top = 486.0
+offset_right = 134.0
+offset_bottom = 486.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7599994, 0.2400012)
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfgu0")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = -10.526316
+offset_top = -8.333254
+offset_right = 81.47369
+offset_bottom = 83.66675
+scale = Vector2(12.353925, 6.800462)
+texture = ExtResource("2_v0qdq")
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 49.736897
+offset_top = -3.3334045
+offset_right = 118.73689
+offset_bottom = 77.666595
+scale = Vector2(2.000004, 6.8131037)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+label_settings = SubResource("LabelSettings_srukh")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="DialogLabel" type="Label" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_86vqb")
+
+[node name="ChoiceContainer" type="HBoxContainer" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="YesButton" type="Button" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer2/ChoiceContainer"]
+layout_mode = 2
+text = "YES"
+
+[node name="NoButton" type="Button" parent="MarginContainer/Panel/HBoxContainer/VBoxContainer2/ChoiceContainer"]
+layout_mode = 2
+text = "NO"

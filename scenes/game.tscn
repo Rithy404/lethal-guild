@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://dysh644negkeq"]
+[gd_scene load_steps=58 format=4 uid="uid://dysh644negkeq"]
 
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://couy0dxkwgxnj" path="res://assets/Map/pixel_16_woods v2 free/free_pixel_16_woods.png" id="1_yqjtg"]
@@ -13,7 +13,9 @@
 [ext_resource type="FontFile" uid="uid://p6xjbd8jiyy4" path="res://assets/UI/ThaleahFat.ttf" id="9_trtic"]
 [ext_resource type="Texture2D" uid="uid://bpsdrbaoofmyy" path="res://assets/UI/healthbarfull.png" id="11_dinhu"]
 [ext_resource type="Texture2D" uid="uid://3pvmh7janxvy" path="res://assets/UI/healthbarempty.png" id="12_kvuet"]
-[ext_resource type="Texture2D" uid="uid://bwfi3nmeuxp13" path="res://assets/UI/Buttons.png" id="13_kvuet"]
+[ext_resource type="Texture2D" uid="uid://ck2bmm1ly0eos" path="res://assets/UI/backbuttonidle.tres" id="14_ca42v"]
+[ext_resource type="Script" uid="uid://c65m1k04tg0ba" path="res://scripts/backbutton.gd" id="14_trtic"]
+[ext_resource type="Texture2D" uid="uid://u1ckna71h1yp" path="res://assets/UI/backbuttonphold.tres" id="15_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -1982,35 +1984,6 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
-atlas = ExtResource("13_kvuet")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
-atlas = ExtResource("13_kvuet")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pl11u"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bt5mj")
-}],
-"loop": true,
-"name": &"clicked",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e1j6l")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhx41"]
-
 [node name="Spawn" type="Node2D"]
 
 [node name="TileMapLayer0" type="TileMapLayer" parent="."]
@@ -2248,28 +2221,19 @@ scale = Vector2(5.52, 5.52)
 texture_under = ExtResource("11_dinhu")
 texture_progress = ExtResource("12_kvuet")
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchor_right = 1.0032831
-anchor_bottom = 1.0040423
-offset_left = 919.0
-offset_right = -196.78223
-offset_bottom = -610.6194
-scale = Vector2(5.894558, 2.3454819)
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Control"]
-position = Vector2(32.911682, 16.201359)
-scale = Vector2(0.6854674, 1.7226853)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Control/Area2D"]
-sprite_frames = SubResource("SpriteFrames_pl11u")
-animation = &"idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/Area2D"]
-shape = SubResource("RectangleShape2D_bhx41")
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -92.0
+offset_right = -76.0
+offset_bottom = 16.0
+grow_horizontal = 0
+scale = Vector2(5.6355705, 5.6355705)
+size_flags_horizontal = 10
+texture_normal = ExtResource("14_ca42v")
+texture_pressed = ExtResource("15_rysoc")
+script = ExtResource("14_trtic")
 
 [connection signal="body_entered" from="Y sort/Dummy/Area2D" to="Y sort/Dummy/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Y sort/Dummy/Area2D" to="Y sort/Dummy/Area2D" method="_on_body_exited"]

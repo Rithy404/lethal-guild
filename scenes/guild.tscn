@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://55aw85610qti"]
+[gd_scene load_steps=46 format=4 uid="uid://55aw85610qti"]
 
 [ext_resource type="Texture2D" uid="uid://dfq40em8614mv" path="res://assets/Map/OLD SHOP/old shop tile_v1.png" id="1_d2yr8"]
 [ext_resource type="Texture2D" uid="uid://dhmxu1ua1sria" path="res://assets/Map/Pixel_16_interiors_v2_free/tiles and items.png" id="1_pl6gq"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ipw7cxab5nbu" path="res://assets/Map/OLD SHOP/old shop objects_v1.png" id="5_0h3y4"]
 [ext_resource type="Texture2D" uid="uid://3lhmsj3k1eb7" path="res://assets/Character/NPC/Female1.png" id="6_0h3y4"]
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="6_0lpxy"]
+[ext_resource type="Script" uid="uid://dtbtatlp8mfow" path="res://scripts/emily.gd" id="6_85pb6"]
 [ext_resource type="Script" uid="uid://bobnhj5et6m8p" path="res://scripts/exitguild.gd" id="7_j6b86"]
+[ext_resource type="PackedScene" uid="uid://bnfhf3pxskwn1" path="res://scenes/dialog_box.tscn" id="8_kbto6"]
 [ext_resource type="AudioStream" uid="uid://c124876gorlhb" path="res://assets/Music/deuslower-medieval-ambient-236809.mp3" id="11_kjqvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_442xa"]
@@ -1423,6 +1425,8 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn20d"]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85pb6"]
 texture = ExtResource("4_j6b86")
 0:0/0 = 0
@@ -2220,6 +2224,7 @@ tile_set = SubResource("TileSet_kjqvi")
 [node name="Emily" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(601, 522)
 scale = Vector2(0.99856746, 0.80002946)
+script = ExtResource("6_85pb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Emily"]
 position = Vector2(0, 3)
@@ -2228,6 +2233,17 @@ shape = SubResource("RectangleShape2D_kjqvi")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Emily"]
 sprite_frames = SubResource("SpriteFrames_kjqvi")
 animation = &"wave"
+
+[node name="DialogBox" parent="Ysort/Emily" instance=ExtResource("8_kbto6")]
+visible = false
+
+[node name="InteractionArea" type="Area2D" parent="Ysort/Emily"]
+z_index = 4096
+position = Vector2(1.0014346, 46.2483)
+scale = Vector2(2.8025823, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Emily/InteractionArea"]
+shape = SubResource("RectangleShape2D_mn20d")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="Ysort"]
 y_sort_enabled = true

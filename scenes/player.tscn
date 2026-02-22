@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://dqiriqs4hdsvi"]
+[gd_scene load_steps=107 format=3 uid="uid://dqiriqs4hdsvi"]
 
 [ext_resource type="Script" uid="uid://cox01wcrkaw22" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Texture2D" uid="uid://7fhximli3x1j" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/ATTACK 2/attack2_right.png" id="2_3v2ag"]
@@ -12,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://dty4522mv5nwc" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/ATTACK 1/attack1_up.png" id="5_oprun"]
 [ext_resource type="Texture2D" uid="uid://cjo0mvy2wejsr" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/RUN/run_down.png" id="6_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://bwc28o3n4nihk" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/RUN/run_up.png" id="7_jej6c"]
+[ext_resource type="Texture2D" uid="uid://jasaxc8ero5i" path="res://assets/UI/empty_bar1.png" id="13_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://c6s2bg7613bsi" path="res://assets/UI/health_barfull.png" id="14_fulsm"]
+[ext_resource type="Texture2D" uid="uid://ck2bmm1ly0eos" path="res://assets/UI/backbuttonidle.tres" id="15_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://u1ckna71h1yp" path="res://assets/UI/backbuttonphold.tres" id="16_60mlk"]
+[ext_resource type="Script" uid="uid://c65m1k04tg0ba" path="res://scripts/backbutton.gd" id="17_i4ail"]
+[ext_resource type="Texture2D" uid="uid://5jowoyxeolyd" path="res://assets/UI/heart.png" id="18_fulsm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51ujp"]
 atlas = ExtResource("2_3v2ag")
@@ -690,3 +696,33 @@ animation = &"attack_down"
 position = Vector2(3.5, -4.499998)
 shape = SubResource("RectangleShape2D_smehm")
 disabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 48.0
+offset_top = 17.0
+offset_right = 146.0
+offset_bottom = 57.0
+scale = Vector2(3.12, 3.12)
+texture_under = ExtResource("13_qfm1y")
+texture_progress = ExtResource("14_fulsm")
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -92.0
+offset_right = -76.0
+offset_bottom = 16.0
+grow_horizontal = 0
+scale = Vector2(5.6355705, 5.6355705)
+size_flags_horizontal = 10
+texture_normal = ExtResource("15_4r5pv")
+texture_pressed = ExtResource("16_60mlk")
+script = ExtResource("17_i4ail")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(38, 33)
+scale = Vector2(2.2800007, 2.2800007)
+texture = ExtResource("18_fulsm")

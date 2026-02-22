@@ -2,14 +2,17 @@ extends CharacterBody2D
 
 @onready var dialog_box: CanvasLayer = $DialogBox
 @onready var interaction_area: Area2D = $InteractionArea
+@onready var quest_ui: CanvasLayer = $"../../QuestBoardUI"
+
+
 
 var player_nearby := false
 var player_ref = null
-var player_chose_yes := false  # Track if player accepted the test
-var has_completed_dialog := false  # Track if initial dialog is done
+var player_chose_yes := false
+var has_completed_dialog := false
 
-# Customize your dialog here
-var dialog_lines := [
+# Dialog for NEW players (no rank yet)
+var initial_dialog := [
 	"Welcome to the Lethal Guild!\nI'm Emily, nice to meet you!",
 	"First time here? You look a bit\nlost, haha!",
 	"Don't let the name intimidate you -\nwe're actually pretty friendly!",
@@ -23,14 +26,18 @@ var dialog_lines := [
 	"[YES]Follow me to the training grounds!",
 	"[NO]No worries! It's a big decision.",
 	"[NO]Take your time to think it over.\nWe'll be here when you're ready!",
-	"Feel free to explore the guild hall!\nSee you around!",
+	"[NO]Feel free to explore the guild hall!\nSee you around!",
+]
+
+var returning_dialog := [
+	"Welcome back!",
+	"Ready to take on some quests?",
+	"Let me show you what's available!",
 ]
 
 var npc_name := "Emily"
 var npc_portrait: Texture2D = preload("res://assets/Character/emily.tres")
-
-# Path to your test area scene
-var test_scene_path := "res://scenes/test_area.tscn"  # Change to your actual path
+var test_scene_path := "res://scenes/test_area.tscn"
 
 func _ready() -> void:
 	interaction_area.body_entered.connect(_on_body_entered)
@@ -43,7 +50,12 @@ func _input(event: InputEvent) -> void:
 		if not dialog_box.is_talking:
 			if player_ref:
 				player_ref.can_move = false
-			dialog_box.start_dialog(dialog_lines, npc_name, npc_portrait)
+			
+			# Check if player already has a rank
+			if Global.has_taken_test or Global.player_rank != "":
+				dialog_box.start_dialog(returning_dialog, npc_name, npc_portrait)
+			else:
+				dialog_box.start_dialog(initial_dialog, npc_name, npc_portrait)
 
 func _on_choice_made(choice: bool) -> void:
 	if choice:
@@ -57,7 +69,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_nearby = true
 		player_ref = body
-		print("Press Z or Enter to talk!")
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -67,43 +78,58 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_dialog_finished() -> void:
 	has_completed_dialog = true
 	
-	# Check if player chose YES and dialog is finished
-	if player_chose_yes:
+	# Check if player has rank
+	if Global.has_taken_test or Global.player_rank != "":
+		# Player has rank - show quest UI
+		show_quest_ui()
+	elif player_chose_yes:
+		# New player chose YES - go to test
 		transition_to_test()
 	else:
-		# Just unlock player movement if they said NO
+		# New player chose NO or just talking
 		player_nearby = false
 		if player_ref:
 			player_ref.can_move = true
 		print("Dialog ended!")
 
+func show_quest_ui():
+	player_nearby = false
+	
+	if quest_ui:
+		# Sample F-Rank quests (you'll load this from data later)
+		var f_rank_quests = [
+			{"title": "Kill 10 Slimes", "reward": 25, "difficulty": "Easy"},
+			{"title": "Kill 10 Lizards", "reward": 50, "difficulty": "Easy"},
+			{"title": "Kill A Giant", "reward": 80, "difficulty": "Medium"},
+		]
+		
+		quest_ui.populate_quests(f_rank_quests)
+		quest_ui.show_quest_board()
+	else:
+		print("Error: Quest UI not found!")
+		if player_ref:
+			player_ref.can_move = true
+
 func transition_to_test() -> void:
 	print("Transitioning to test area...")
 	
-	# Save player's current position and scene using existing Global variables
 	if player_ref:
 		Global.spawn_position = player_ref.global_position
 	Global.from_scene = get_tree().current_scene.scene_file_path
 	
-	# Fade transition
 	fade_to_test()
 
 func fade_to_test() -> void:
-	# Simple fade using ColorRect
 	var fade = ColorRect.new()
 	fade.color = Color.BLACK
 	fade.modulate.a = 0
 	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# Make it fullscreen
 	fade.set_anchors_preset(Control.PRESET_FULL_RECT)
 	
 	get_tree().current_scene.add_child(fade)
 	
-	# Fade out
 	var tween = create_tween()
 	tween.tween_property(fade, "modulate:a", 1.0, 0.5)
 	await tween.finished
 	
-	# Change scene
 	get_tree().change_scene_to_file(test_scene_path)

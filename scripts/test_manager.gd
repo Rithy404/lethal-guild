@@ -1,11 +1,12 @@
 extends Node2D
 
 
-@onready var test_dummy: Area2D = $Dummy/Area2D
+@onready var test_dummy: Area2D = $Node2D/Dummy/Area2D
 @onready var timer_label: Label = $CanvasLayer/TimerLabel
 @onready var player_spawn: Marker2D = $PlayerSpawnPoint
 @onready var dialog_box: CanvasLayer = $CanvasLayer/DialogBox
-@onready var player_ref: CharacterBody2D = $Player
+@onready var player_ref: CharacterBody2D = $Node2D/Player
+
 
 var test_active = false
 var time_remaining = 30.0

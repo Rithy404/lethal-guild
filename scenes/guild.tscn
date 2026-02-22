@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://55aw85610qti"]
+[gd_scene load_steps=59 format=4 uid="uid://55aw85610qti"]
 
 [ext_resource type="Texture2D" uid="uid://dfq40em8614mv" path="res://assets/Map/OLD SHOP/old shop tile_v1.png" id="1_d2yr8"]
 [ext_resource type="Texture2D" uid="uid://dhmxu1ua1sria" path="res://assets/Map/Pixel_16_interiors_v2_free/tiles and items.png" id="1_pl6gq"]
@@ -12,7 +12,17 @@
 [ext_resource type="Script" uid="uid://dtbtatlp8mfow" path="res://scripts/emily.gd" id="6_85pb6"]
 [ext_resource type="Script" uid="uid://bobnhj5et6m8p" path="res://scripts/exitguild.gd" id="7_j6b86"]
 [ext_resource type="PackedScene" uid="uid://bnfhf3pxskwn1" path="res://scenes/dialog_box.tscn" id="8_kbto6"]
+[ext_resource type="Texture2D" uid="uid://d1ojg1ii5qnj3" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_BookCover01a.png" id="9_7mg1b"]
+[ext_resource type="Script" uid="uid://dxqxueg14mehh" path="res://scripts/quest_board.gd" id="9_wse8e"]
+[ext_resource type="Texture2D" uid="uid://drkc7pgg5k6ix" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_BookPageLeft01a.png" id="10_4porf"]
 [ext_resource type="AudioStream" uid="uid://c124876gorlhb" path="res://assets/Music/deuslower-medieval-ambient-236809.mp3" id="11_kjqvi"]
+[ext_resource type="Texture2D" uid="uid://ckrxnm6r57552" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_Frame01a.png" id="11_wse8e"]
+[ext_resource type="FontFile" uid="uid://cp8twwoye0810" path="res://assets/UI/monogram.ttf" id="12_goqad"]
+[ext_resource type="Texture2D" uid="uid://cd4mpc7qy0tsg" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_Popup01a.png" id="13_l3uh5"]
+[ext_resource type="Texture2D" uid="uid://ceojhekkq6be3" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_Slot01c.png" id="14_808fq"]
+[ext_resource type="Texture2D" uid="uid://cepra2p4n1cib" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_IconTick01a.png" id="15_6cj3d"]
+[ext_resource type="Texture2D" uid="uid://c1lgnl2eusatu" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_IconCross01a.png" id="16_p61ty"]
+[ext_resource type="Texture2D" uid="uid://4of664ivshts" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_IconPlay01a.png" id="18_goqad"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_442xa"]
 texture = ExtResource("1_d2yr8")
@@ -2203,6 +2213,25 @@ sources/0 = SubResource("TileSetAtlasSource_mn20d")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h3y4"]
 size = Vector2(44, 24)
 
+[sub_resource type="LabelSettings" id="LabelSettings_n3c60"]
+font = ExtResource("12_goqad")
+font_size = 64
+font_color = Color(0.5647059, 0.78431374, 0.19607843, 1)
+outline_size = 6
+outline_color = Color(1.0059327e-05, 0.9480954, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aftgb"]
+font = ExtResource("12_goqad")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3uh5"]
+font = ExtResource("12_goqad")
+font_size = 32
+font_color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
 [node name="Guild" type="Node2D"]
 
 [node name="Floor" type="TileMapLayer" parent="."]
@@ -2300,6 +2329,249 @@ shape = SubResource("RectangleShape2D_0h3y4")
 stream = ExtResource("11_kjqvi")
 volume_db = -2.6
 autoplay = true
+
+[node name="QuestBoardUI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("9_wse8e")
+
+[node name="BG" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.5
+offset_top = -287.63943
+offset_right = 203.5
+offset_bottom = 287.63943
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_7mg1b")
+
+[node name="BG2" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -271.0
+offset_right = 188.0
+offset_bottom = 271.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("10_4porf")
+
+[node name="Header" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -260.0
+offset_right = 168.0
+offset_bottom = -196.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.88, 1)
+size_flags_horizontal = 4
+texture = ExtResource("11_wse8e")
+
+[node name="Label" type="Label" parent="QuestBoardUI/Header"]
+layout_mode = 0
+offset_left = 46.0
+offset_right = 326.0
+offset_bottom = 59.0
+text = "Quest List"
+label_settings = SubResource("LabelSettings_n3c60")
+uppercase = true
+
+[node name="Quest" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -188.0
+offset_right = 176.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.9599994)
+size_flags_horizontal = 4
+texture = ExtResource("13_l3uh5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestBoardUI/Quest"]
+layout_mode = 0
+offset_left = 26.086956
+offset_top = 6.250001
+offset_right = 194.08696
+offset_bottom = 91.25
+scale = Vector2(0.83871037, 1.0833359)
+
+[node name="QuestLabel" type="Label" parent="QuestBoardUI/Quest/VBoxContainer"]
+layout_mode = 2
+text = "Kill 10 Slimes"
+label_settings = SubResource("LabelSettings_aftgb")
+
+[node name="QuestDifficulty" type="Label" parent="QuestBoardUI/Quest/VBoxContainer"]
+layout_mode = 2
+text = "Difficulty: F"
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="QuestReward" type="Label" parent="QuestBoardUI/Quest/VBoxContainer"]
+layout_mode = 2
+text = "Reward: 10 XP"
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="TextureRect3" type="TextureRect" parent="QuestBoardUI/Quest"]
+layout_mode = 0
+offset_left = 260.86957
+offset_top = 16.666674
+offset_right = 290.86957
+offset_bottom = 46.666676
+scale = Vector2(1.7617373, 2.2460048)
+size_flags_horizontal = 4
+texture = ExtResource("14_808fq")
+
+[node name="AcceptButton" type="TextureButton" parent="QuestBoardUI/Quest"]
+layout_mode = 0
+offset_left = 269.56525
+offset_top = 25.000017
+offset_right = 437.56525
+offset_bottom = 37.000015
+scale = Vector2(2.2245455, 4.3720922)
+texture_normal = ExtResource("15_6cj3d")
+
+[node name="Quest2" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -60.0
+offset_right = 176.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.9599994)
+size_flags_horizontal = 4
+texture = ExtResource("13_l3uh5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestBoardUI/Quest2"]
+layout_mode = 0
+offset_left = 26.086956
+offset_top = 6.250001
+offset_right = 194.08696
+offset_bottom = 91.25
+scale = Vector2(0.83871037, 1.0833359)
+
+[node name="QuestLabel" type="Label" parent="QuestBoardUI/Quest2/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_aftgb")
+
+[node name="QuestDifficulty" type="Label" parent="QuestBoardUI/Quest2/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="QuestReward" type="Label" parent="QuestBoardUI/Quest2/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="TextureRect3" type="TextureRect" parent="QuestBoardUI/Quest2"]
+layout_mode = 0
+offset_left = 260.86957
+offset_top = 16.666674
+offset_right = 290.86957
+offset_bottom = 46.666676
+scale = Vector2(1.7617373, 2.2460048)
+size_flags_horizontal = 4
+texture = ExtResource("14_808fq")
+
+[node name="AcceptButton" type="TextureButton" parent="QuestBoardUI/Quest2"]
+layout_mode = 0
+offset_left = 269.56525
+offset_top = 25.000017
+offset_right = 437.56525
+offset_bottom = 37.000015
+scale = Vector2(2.2245455, 4.3720922)
+texture_normal = ExtResource("15_6cj3d")
+
+[node name="Quest3" type="TextureRect" parent="QuestBoardUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = 68.0
+offset_right = 176.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.9599994)
+size_flags_horizontal = 4
+texture = ExtResource("13_l3uh5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestBoardUI/Quest3"]
+layout_mode = 0
+offset_left = 26.086956
+offset_top = 6.250001
+offset_right = 194.08696
+offset_bottom = 91.25
+scale = Vector2(0.83871037, 1.0833359)
+
+[node name="QuestLabel" type="Label" parent="QuestBoardUI/Quest3/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_aftgb")
+
+[node name="QuestDifficulty" type="Label" parent="QuestBoardUI/Quest3/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="QuestReward" type="Label" parent="QuestBoardUI/Quest3/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_l3uh5")
+
+[node name="TextureRect3" type="TextureRect" parent="QuestBoardUI/Quest3"]
+layout_mode = 0
+offset_left = 260.86957
+offset_top = 16.666674
+offset_right = 290.86957
+offset_bottom = 46.666676
+scale = Vector2(1.7617373, 2.2460048)
+size_flags_horizontal = 4
+texture = ExtResource("14_808fq")
+
+[node name="AcceptButton" type="TextureButton" parent="QuestBoardUI/Quest3"]
+layout_mode = 0
+offset_left = 269.56525
+offset_top = 25.000017
+offset_right = 437.56525
+offset_bottom = 37.000015
+scale = Vector2(2.2245455, 4.3720922)
+texture_normal = ExtResource("15_6cj3d")
+
+[node name="CloseButton" type="TextureButton" parent="QuestBoardUI"]
+offset_left = 720.0
+offset_top = 66.0
+offset_right = 760.0
+offset_bottom = 106.0
+scale = Vector2(2.5999951, 2.5999951)
+texture_normal = ExtResource("16_p61ty")
+
+[node name="NextPage" type="TextureButton" parent="QuestBoardUI"]
+offset_left = 712.0
+offset_top = 520.0
+offset_right = 752.0
+offset_bottom = 560.0
+scale = Vector2(3.600005, 3.4615269)
+texture_normal = ExtResource("18_goqad")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

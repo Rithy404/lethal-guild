@@ -589,15 +589,4 @@ animation = &"idle_right"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_2e6r5")
-
-[node name="Slime2" type="CharacterBody2D" parent="Ysort"]
-position = Vector2(209, 544)
-script = ExtResource("3_d0v8l")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime2"]
-sprite_frames = SubResource("SpriteFrames_5kg1b")
-animation = &"idle_right"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime2"]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_2e6r5")

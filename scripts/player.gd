@@ -4,6 +4,7 @@ const SPEED = 67.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hp_bar: TextureProgressBar = $CanvasLayer/TextureProgressBar
 @onready var quest_ui: TextureRect = $CanvasLayer/Quest
+@onready var death_screen: CanvasLayer = $DeathScreen 
 
 var last_dir = Vector2.ZERO   # stores the last direction faced
 var is_attacking = false
@@ -12,28 +13,37 @@ var can_move = true
 # HP System
 var max_health = 100
 var current_health = 100
+var is_dead = false 
 
 
 func _ready():
 	add_to_group("player")
 	animated_sprite.animation_finished.connect(_on_animation_finished)
+	
+	# Connect death screen signal
+	if death_screen:
+		death_screen.respawn_player.connect(_on_respawn)
+	
+	# Handle spawn position
 	global_position = Global.spawn_position
 	if Global.spawn_position == Vector2.ZERO:
-		global_position = Vector2(200, 275)  # Fallback spawn
+		global_position = Vector2(200, 275)
 	
 	# Initialize HP bar
 	if hp_bar:
 		hp_bar.max_value = max_health
 		hp_bar.value = current_health
+	
+	# Hide quest UI initially
 	if quest_ui:
 		quest_ui.hide()
 	
-	# Only restore quest if there's an active quest
+	# Restore active quest
 	restore_quest_from_global()
 
 
 func _physics_process(delta: float) -> void:
-	if is_attacking or not can_move:
+	if is_attacking or not can_move or is_dead:
 		return  # Skip movement and input during attack
 	var x := Input.get_axis("move_left", "move_right")
 	var y := Input.get_axis("move_up", "move_down")
@@ -130,18 +140,25 @@ func check_dummy_hit():
 
 # HP System Functions
 func take_damage(amount: int):
+	if is_dead:  # Don't take damage if already dead
+		return
 	current_health -= amount
 	current_health = max(0, current_health)  # Don't go below 0
 	update_hp_bar()
 	
 	print("Player took %d damage! HP: %d/%d" % [amount, current_health, max_health])
-	
+	flash_damage()
 	# Optional: Play hurt animation/sound
 	# play_hurt_animation()
 	
 	if current_health <= 0:
 		die()
-
+func flash_damage():
+	animated_sprite.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	if not is_dead:
+		animated_sprite.modulate = Color.WHITE
+		
 func heal(amount: int):
 	current_health += amount
 	current_health = min(max_health, current_health)  # Don't exceed max
@@ -154,13 +171,50 @@ func update_hp_bar():
 		hp_bar.value = current_health
 
 func die():
+	if is_dead:  # Prevent multiple death calls
+		return
+	
 	print("Player died!")
+	is_dead = true
 	can_move = false
-	# Add death logic here:
-	# - Play death animation
-	# - Show game over screen
-	# - Respawn player
-	# - etc.
+	velocity = Vector2.ZERO
+	
+	# Play death animation if you have one
+	# animated_sprite.play("death")
+	# await animated_sprite.animation_finished
+	
+	# Show death screen
+	if death_screen:
+		death_screen.show_death_screen()
+	else:
+		print("Error: Death screen not found!")
+		# Fallback - respawn immediately
+		await get_tree().create_timer(3.0).timeout
+		respawn()
+
+func respawn():
+	print("Player respawning!")
+	
+	# Reset state
+	is_dead = false
+	current_health = max_health
+	can_move = true
+	velocity = Vector2.ZERO
+	
+	# Reset position
+	global_position = Global.spawn_position
+	if Global.spawn_position == Vector2.ZERO:
+		global_position = Vector2(200, 275)
+	
+	# Reset visuals
+	animated_sprite.modulate = Color.WHITE
+	update_hp_bar()
+	
+	# Play idle animation
+	animated_sprite.play("idle_x")
+
+func _on_respawn():
+	respawn()
 
 func _on_animation_finished():
 	if animated_sprite.animation in ["attack_right", "attack_up", "attack_down"]:

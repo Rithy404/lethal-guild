@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://dqiriqs4hdsvi"]
+[gd_scene load_steps=116 format=3 uid="uid://dqiriqs4hdsvi"]
 
 [ext_resource type="Script" uid="uid://cox01wcrkaw22" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Texture2D" uid="uid://7fhximli3x1j" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/ATTACK 2/attack2_right.png" id="2_3v2ag"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://c7qeu4t031a64" path="res://scripts/player_quest_ui.gd" id="20_a38lo"]
 [ext_resource type="FontFile" uid="uid://cp8twwoye0810" path="res://assets/UI/monogram.ttf" id="20_i4ail"]
 [ext_resource type="Texture2D" uid="uid://bk0pcfse0f852" path="res://assets/UI/quest.png" id="21_a38lo"]
+[ext_resource type="Script" uid="uid://bo3nb8ocjo5rq" path="res://scripts/death_screen.gd" id="23_4ni07"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51ujp"]
 atlas = ExtResource("2_3v2ag")
@@ -696,6 +697,12 @@ font = ExtResource("20_i4ail")
 font_size = 32
 font_color = Color(0.1141377, 0.42270276, 0.10987928, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ke2ow"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_ujl30"]
+font_size = 64
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_fjrip")
@@ -775,3 +782,30 @@ offset_top = 11.0
 offset_right = 1056.0
 offset_bottom = 67.0
 texture_normal = ExtResource("21_a38lo")
+
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+script = ExtResource("23_4ni07")
+
+[node name="Panel" type="ColorRect" parent="DeathScreen"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.72, 16.04)
+color = Color(0.029506557, 0.029506557, 0.029506557, 1)
+
+[node name="WastedLabel" type="Label" parent="DeathScreen/Panel"]
+layout_mode = 0
+offset_left = 11.699165
+offset_top = 20.448877
+offset_right = 470.69916
+offset_bottom = 108.448875
+scale = Vector2(0.04230996, 0.04230996)
+label_settings = SubResource("LabelSettings_ke2ow")
+
+[node name="CountdownLabel" type="Label" parent="DeathScreen/Panel"]
+layout_mode = 0
+offset_left = 20.891367
+offset_top = 22.94264
+offset_right = 60.891365
+offset_bottom = 110.94264
+scale = Vector2(0.042747643, 0.09287882)
+label_settings = SubResource("LabelSettings_ujl30")

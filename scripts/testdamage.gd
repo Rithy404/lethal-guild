@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var damage_amount: int = 5
+@export var damage_amount: int = 30
 @export var damage_interval: float = 1.0  # Damage every 1 second
 
 var player_inside = false

@@ -8,6 +8,7 @@ extends CanvasLayer
 var quest_nodes = []
 var quest_data_array = []  # Store quest data
 
+
 func _ready() -> void:
 	# Collect all quest nodes
 	quest_nodes = [quest, quest_2, quest_3]
@@ -67,7 +68,16 @@ func _on_quest_accepted(quest_index: int):
 	print("Reward: ", data.get("reward", 0), " XP")
 	print("Objective: ", data.get("objective", "Unknown"))
 	print("======================\n")
-
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("accept_quest"):
+		var accepted = player.accept_quest(data)
+		if accepted:
+			# Close quest board after accepting
+			_on_close_button_pressed()
+		else:
+			print("Player already has an active quest!")
+			# You could show an error message here
+			
 func populate_quests(quest_data: Array):
 	# Store quest data for later use
 	quest_data_array = quest_data

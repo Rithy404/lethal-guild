@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 67.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hp_bar: TextureProgressBar = $CanvasLayer/TextureProgressBar
+@onready var quest_ui: TextureRect = $CanvasLayer/Quest
 
 var last_dir = Vector2.ZERO   # stores the last direction faced
 var is_attacking = false
@@ -11,6 +12,7 @@ var can_move = true
 # HP System
 var max_health = 100
 var current_health = 100
+
 
 func _ready():
 	add_to_group("player")
@@ -23,6 +25,12 @@ func _ready():
 	if hp_bar:
 		hp_bar.max_value = max_health
 		hp_bar.value = current_health
+	if quest_ui:
+		quest_ui.hide()
+	
+	# Only restore quest if there's an active quest
+	restore_quest_from_global()
+
 
 func _physics_process(delta: float) -> void:
 	if is_attacking or not can_move:
@@ -155,3 +163,73 @@ func _on_animation_finished():
 			animated_sprite.play("idle_yplus")
 		else:
 			animated_sprite.play("idle_x")
+
+func restore_quest_from_global():
+	# Check if there's actually an active quest to restore
+	if Global.has_active_quest and not Global.active_quest.is_empty():
+		# Restore quest to UI
+		if quest_ui:
+			quest_ui.show_quest(Global.active_quest)
+			quest_ui.update_quest_progress(Global.quest_progress, Global.quest_target)
+		print("Quest restored: ", Global.active_quest.get("title", "Unknown"))
+	else:
+		# No active quest, make sure UI is hidden
+		if quest_ui:
+			quest_ui.hide()
+		print("No active quest to restore")
+func accept_quest(quest_data: Dictionary):
+	if Global.has_active_quest:
+		print("Already have an active quest!")
+		return false
+	
+	# Save to Global
+	Global.active_quest = quest_data
+	Global.has_active_quest = true
+	
+	# Extract target number from quest
+	var target = extract_quest_target(quest_data.get("title", ""))
+	Global.quest_target = target
+	Global.quest_progress = 0
+	
+	# Show on UI
+	if quest_ui:
+		quest_ui.show_quest(quest_data)
+	
+	print("Quest accepted: ", quest_data.get("title", "Unknown"))
+	return true
+
+func extract_quest_target(title: String) -> int:
+	# Extract number from "Kill 10 Slimes" -> 10
+	var words = title.split(" ")
+	for word in words:
+		if word.is_valid_int():
+			return int(word)
+	return 0
+
+func update_quest_progress(amount: int):
+	if Global.has_active_quest:
+		Global.quest_progress += amount
+		
+		if quest_ui:
+			quest_ui.update_quest_progress(Global.quest_progress, Global.quest_target)
+		
+		# Check if quest is complete
+		if Global.quest_progress >= Global.quest_target:
+			complete_quest()
+
+func complete_quest():
+	if Global.has_active_quest:
+		var reward = Global.active_quest.get("reward", 0)
+		print("Quest completed! Reward: %d Gold" % reward)
+		
+		# Give reward (implement gold system later)
+		# Global.player_gold += reward
+		
+		if quest_ui:
+			quest_ui.complete_quest()
+		
+		# Clear global quest data
+		Global.has_active_quest = false
+		Global.active_quest.clear()
+		Global.quest_progress = 0
+		Global.quest_target = 0

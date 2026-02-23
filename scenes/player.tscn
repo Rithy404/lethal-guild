@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://dqiriqs4hdsvi"]
+[gd_scene load_steps=113 format=3 uid="uid://dqiriqs4hdsvi"]
 
 [ext_resource type="Script" uid="uid://cox01wcrkaw22" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Texture2D" uid="uid://7fhximli3x1j" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/ATTACK 2/attack2_right.png" id="2_3v2ag"]
@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://u1ckna71h1yp" path="res://assets/UI/backbuttonphold.tres" id="16_60mlk"]
 [ext_resource type="Script" uid="uid://c65m1k04tg0ba" path="res://scripts/backbutton.gd" id="17_i4ail"]
 [ext_resource type="Texture2D" uid="uid://5jowoyxeolyd" path="res://assets/UI/heart.png" id="18_fulsm"]
+[ext_resource type="Texture2D" uid="uid://cd4mpc7qy0tsg" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_Popup01a.png" id="19_4r5pv"]
+[ext_resource type="Script" uid="uid://c7qeu4t031a64" path="res://scripts/player_quest_ui.gd" id="20_a38lo"]
+[ext_resource type="FontFile" uid="uid://cp8twwoye0810" path="res://assets/UI/monogram.ttf" id="20_i4ail"]
+[ext_resource type="Texture2D" uid="uid://bk0pcfse0f852" path="res://assets/UI/quest.png" id="21_a38lo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51ujp"]
 atlas = ExtResource("2_3v2ag")
@@ -682,6 +686,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_smehm"]
 size = Vector2(5, 9.000004)
 
+[sub_resource type="LabelSettings" id="LabelSettings_4ni07"]
+font = ExtResource("20_i4ail")
+font_size = 32
+font_color = Color(0.18717614, 0.18717614, 0.18717614, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l71n6"]
+font = ExtResource("20_i4ail")
+font_size = 32
+font_color = Color(0.1141377, 0.42270276, 0.10987928, 1)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_fjrip")
@@ -712,11 +726,12 @@ texture_progress = ExtResource("14_fulsm")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -92.0
-offset_right = -76.0
-offset_bottom = 16.0
+offset_left = -71.99988
+offset_top = 7.9999995
+offset_right = -55.999878
+offset_bottom = 24.0
 grow_horizontal = 0
-scale = Vector2(5.6355705, 5.6355705)
+scale = Vector2(3.9955707, 3.9955707)
 size_flags_horizontal = 10
 texture_normal = ExtResource("15_4r5pv")
 texture_pressed = ExtResource("16_60mlk")
@@ -726,3 +741,37 @@ script = ExtResource("17_i4ail")
 position = Vector2(38, 33)
 scale = Vector2(2.2800007, 2.2800007)
 texture = ExtResource("18_fulsm")
+
+[node name="Quest" type="TextureRect" parent="CanvasLayer"]
+offset_left = 29.0
+offset_top = 96.0
+offset_right = 121.0
+offset_bottom = 226.82613
+scale = Vector2(3.281035, 0.63034886)
+texture = ExtResource("19_4r5pv")
+script = ExtResource("20_a38lo")
+
+[node name="Label" type="Label" parent="CanvasLayer/Quest"]
+layout_mode = 0
+offset_left = 22.85864
+offset_right = 178.85864
+offset_bottom = 26.0
+scale = Vector2(0.3, 2.0601451)
+text = "Current Quest"
+label_settings = SubResource("LabelSettings_4ni07")
+
+[node name="Label2" type="Label" parent="CanvasLayer/Quest"]
+layout_mode = 0
+offset_left = 5.7908554
+offset_top = 58.144943
+offset_right = 197.79086
+offset_bottom = 84.14494
+scale = Vector2(0.31728855, 1.7932585)
+label_settings = SubResource("LabelSettings_l71n6")
+
+[node name="ShowQuest" type="TextureButton" parent="CanvasLayer"]
+offset_left = 1000.0
+offset_top = 11.0
+offset_right = 1056.0
+offset_bottom = 67.0
+texture_normal = ExtResource("21_a38lo")

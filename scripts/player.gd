@@ -108,7 +108,6 @@ func attack():
 func check_dummy_hit():
 	# Find all Area2D nodes in range (you can use groups or get_overlapping_areas)
 	var space_state = get_world_2d().direct_space_state
-	
 	# Or better: use groups
 	var dummies = get_tree().get_nodes_in_group("dummies")
 	for dummy in dummies:
@@ -118,6 +117,16 @@ func check_dummy_hit():
 				# Call damage function on dummy
 				if dummy.has_method("take_damage"):
 					dummy.take_damage(10)
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		if enemy.has_method("can_be_hit_by_player"):
+			var mouse_pos = get_global_mouse_position()
+			var player_facing = (mouse_pos - global_position).normalized()
+			
+			if enemy.can_be_hit_by_player(global_position, player_facing):
+				print("HIT THE SLIME!")
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(10)
 
 # HP System Functions
 func take_damage(amount: int):

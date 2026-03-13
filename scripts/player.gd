@@ -27,9 +27,6 @@ func _ready():
 	add_to_group("player")
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	
-	if upgrade_ui:
-		upgrade_ui.hide()
-
 	# Connect death screen signal
 	if death_screen:
 		death_screen.respawn_player.connect(_on_respawn)
@@ -39,22 +36,25 @@ func _ready():
 	if Global.spawn_position == Vector2.ZERO:
 		global_position = Vector2(200, 275)
 	
+	# Apply stat bonuses FIRST (calculates max_health)
+	apply_stat_bonuses()
+	
+	# THEN restore current health from Global
+	if Global.player_current_health > 0:
+		current_health = min(Global.player_current_health, max_health)
+	else:
+		current_health = max_health  # First time, start at full
+		Global.player_current_health = current_health
+	
 	# Initialize HP bar
 	if hp_bar:
 		hp_bar.max_value = max_health
 		hp_bar.value = current_health
 	
-	# Initialize EXP bar - ADD THIS
+	# Initialize EXP bar
 	if exp_bar:
 		exp_bar.max_value = Global.player_exp_to_next_level
 		exp_bar.value = Global.player_exp
-		print("EXP bar initialized!")
-	else:
-		print("Warning: EXP bar not found!")
-	
-	
-	# Apply stat bonuses - ADD THIS
-	apply_stat_bonuses()
 	
 	# Hide quest UI initially
 	if quest_ui:
@@ -65,13 +65,11 @@ func _ready():
 	
 func apply_stat_bonuses():
 	# Apply health bonus
-	var total_max_health = 100 + (Global.player_health_bonus * 10)  # Each point = +10 max HP
+	var total_max_health = 100 + (Global.player_health_bonus * 10)
 	max_health = total_max_health
-	current_health = min(current_health, max_health)  # Don't exceed new max
 	
 	if hp_bar:
 		hp_bar.max_value = max_health
-		hp_bar.value = current_health
 	
 	print("Stats applied - Max HP: %d, Strength: %d, Speed bonus: %d" % [max_health, Global.player_strength, Global.player_speed_bonus])
 	
@@ -133,21 +131,20 @@ func _process(delta: float) -> void:
 	if current_health < max_health:
 		time_since_last_damage += delta
 		
-		# Start regenerating after delay
 		if time_since_last_damage >= regen_delay:
 			if not is_regenerating:
 				is_regenerating = true
 				print("Started regenerating health")
 			
-			# Heal over time
 			var heal_amount = regen_rate * delta
 			current_health += heal_amount
-			current_health = min(current_health, max_health)  # Cap at max
+			current_health = min(current_health, max_health)
+			Global.player_current_health = current_health  # ← Save to Global
 			update_hp_bar()
 			
-			# Stop regenerating when full
 			if current_health >= max_health:
 				current_health = max_health
+				Global.player_current_health = current_health  # ← Save to Global
 				is_regenerating = false
 				print("Health fully regenerated!")
 	else:
@@ -239,6 +236,7 @@ func take_damage(amount: int):
 	
 	current_health -= amount
 	current_health = max(0, current_health)
+	Global.player_current_health = current_health  # ← Save to Global
 	update_hp_bar()
 	
 	# Stop regeneration and reset timer
@@ -260,6 +258,7 @@ func flash_damage():
 func heal(amount: int):
 	current_health += amount
 	current_health = min(max_health, current_health)
+	Global.player_current_health = current_health  # ← Save to Global
 	update_hp_bar()
 	
 	print("Player healed %d HP! HP: %d/%d" % [amount, current_health, max_health])
@@ -292,6 +291,7 @@ func respawn():
 	# Reset state
 	is_dead = false
 	current_health = max_health
+	Global.player_current_health = current_health  # ← Save to Global
 	can_move = true
 	velocity = Vector2.ZERO
 	is_regenerating = false

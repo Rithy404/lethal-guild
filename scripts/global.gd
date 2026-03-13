@@ -3,7 +3,7 @@ extends Node
 var spawn_position: Vector2 = Vector2.ZERO
 var from_scene: String = ""
 var player_rank: String = ""
-var has_taken_test: bool = false
+var has_taken_test: bool = true
 # Quest System - Add these
 var active_quest: Dictionary = {}
 var has_active_quest: bool = false
@@ -15,7 +15,7 @@ var player_level: int = 1
 var player_exp: int = 0
 var player_exp_to_next_level: int = 100  # Experience needed for level 2
 var stat_points: int = 0  # Points to spend on stats
-
+var player_current_health: int = 100
 # Player Stats
 var player_strength: int = 0  # Affects damage
 var player_speed_bonus: int = 0  # Added to base speed

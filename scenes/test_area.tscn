@@ -1,15 +1,12 @@
-[gd_scene load_steps=46 format=4 uid="uid://vrqnpygeicsf"]
+[gd_scene load_steps=40 format=4 uid="uid://vrqnpygeicsf"]
 
-[ext_resource type="Texture2D" uid="uid://bna8bysnfcec4" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/walls/walls.png" id="1_e0uvj"]
+[ext_resource type="Texture2D" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/walls/walls.png" id="1_e0uvj"]
 [ext_resource type="Script" uid="uid://c2kj17mof16j3" path="res://scripts/test_manager.gd" id="1_ggu47"]
-[ext_resource type="Texture2D" uid="uid://8c8g7jsmw60h" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/floors/flooring.png" id="2_erwy7"]
-[ext_resource type="Texture2D" uid="uid://ynso70hu51hq" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/floors/wooden.png" id="3_hroh7"]
+[ext_resource type="Texture2D" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/floors/flooring.png" id="2_erwy7"]
+[ext_resource type="Texture2D" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/floors/wooden.png" id="3_hroh7"]
 [ext_resource type="Texture2D" uid="uid://uynuqnn4f63k" path="res://assets/Map/walls.png" id="4_mdkqu"]
-[ext_resource type="Texture2D" uid="uid://p6xik43063wa" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/walls/wooden_door_b.png" id="5_ggu47"]
-[ext_resource type="Texture2D" uid="uid://bpwy6iolvavl7" path="res://assets/Map/mystic_woods_free_2.2/sprites/objects/chest_02.png" id="6_61pjd"]
-[ext_resource type="Texture2D" uid="uid://biprv66ofh5q5" path="res://assets/Map/Top_Down_Adventure_Pack_v.1.0/Props_Items_(animated)/torch_prop_anim_strip_5.png" id="7_plljx"]
+[ext_resource type="Texture2D" path="res://assets/Map/mystic_woods_free_2.2/sprites/tilesets/walls/wooden_door_b.png" id="5_ggu47"]
 [ext_resource type="Texture2D" uid="uid://cjr2jxg11qjc5" path="res://assets/Character/dummy_spritesheet.png" id="8_dlp1t"]
-[ext_resource type="Texture2D" uid="uid://c05537mvfhj30" path="res://assets/Map/mystic_woods_free_2.2/sprites/objects/chest_01.png" id="9_61pjd"]
 [ext_resource type="Script" uid="uid://du5vx0a7jb4ar" path="res://scripts/area_2ddummy.gd" id="9_xqnh6"]
 [ext_resource type="Texture2D" uid="uid://ipw7cxab5nbu" path="res://assets/Map/OLD SHOP/old shop objects_v1.png" id="10_plljx"]
 [ext_resource type="FontFile" uid="uid://p6xjbd8jiyy4" path="res://assets/UI/ThaleahFat.ttf" id="10_wjarl"]
@@ -155,28 +152,6 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_tqnim")
 sources/2 = SubResource("TileSetAtlasSource_6cvml")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dw8oy"]
-texture = ExtResource("6_61pjd")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oqdo6"]
-texture = ExtResource("7_plljx")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqnh6"]
-texture = ExtResource("9_61pjd")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wjarl"]
 texture = ExtResource("10_plljx")
 0:0/0 = 0
@@ -316,9 +291,6 @@ texture = ExtResource("10_plljx")
 3:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_nmwmj"]
-sources/1 = SubResource("TileSetAtlasSource_dw8oy")
-sources/3 = SubResource("TileSetAtlasSource_oqdo6")
-sources/4 = SubResource("TileSetAtlasSource_xqnh6")
 sources/5 = SubResource("TileSetAtlasSource_wjarl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfqyx"]

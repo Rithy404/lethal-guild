@@ -2242,7 +2242,5 @@ shape = SubResource("RectangleShape2D_dinhu")
 [connection signal="body_exited" from="Y sort/Dummy3/Area2D" to="Y sort/Dummy3/Area2D" method="_on_body_exited"]
 [connection signal="body_entered" from="Guild" to="Guild" method="_on_body_entered"]
 [connection signal="body_exited" from="Guild" to="Guild" method="_on_body_exited"]
-[connection signal="body_entered" from="Damage" to="Damage" method="_on_body_entered"]
-[connection signal="body_exited" from="Damage" to="Damage" method="_on_body_exited"]
 [connection signal="body_entered" from="Dungeon" to="Dungeon" method="_on_body_entered"]
 [connection signal="body_exited" from="Dungeon" to="Dungeon" method="_on_body_exited"]

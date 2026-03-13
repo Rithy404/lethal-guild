@@ -99,8 +99,6 @@ func show_quest_ui():
 		# Sample F-Rank quests (you'll load this from data later)
 		var f_rank_quests = [
 			{"title": "Kill 10 Slimes", "reward": 25, "difficulty": "Easy"},
-			{"title": "Kill 10 Lizards", "reward": 50, "difficulty": "Easy"},
-			{"title": "Kill A Giant", "reward": 80, "difficulty": "Medium"},
 		]
 		
 		quest_ui.populate_quests(f_rank_quests)

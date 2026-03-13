@@ -2331,7 +2331,6 @@ volume_db = -2.6
 autoplay = true
 
 [node name="QuestBoardUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("9_wse8e")
 
 [node name="BG" type="TextureRect" parent="QuestBoardUI"]

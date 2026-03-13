@@ -102,7 +102,6 @@ func populate_quests(quest_data: Array):
 				reward_label.text = str(data.get("reward", 0)) + " XP"
 			
 			quest.show()
-	
 	# Hide unused quest slots
 	for i in range(quest_data.size(), quest_nodes.size()):
 		if quest_nodes[i]:

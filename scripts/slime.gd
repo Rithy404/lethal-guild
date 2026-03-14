@@ -22,9 +22,11 @@ var player_in_attack_range: bool = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_area: Area2D = $AttackArea
+@onready var slime_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 enum State { IDLE, CHASE, ATTACK, RETURN }
 var current_state = State.IDLE
+var was_player_detected: bool = false
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -67,10 +69,26 @@ func _physics_process(delta: float) -> void:
 			process_attack()
 		State.RETURN:
 			process_return()
-	
+	handle_audio()
 	move_and_slide()
 	update_animation()
 
+func handle_audio():
+	# Player just entered detection range
+	if player_in_detection_range and not was_player_detected:
+		if slime_sound and not slime_sound.playing:
+			slime_sound.play()
+			print("Slime: Player detected - playing sound")
+	
+	# Player just left detection range
+	if not player_in_detection_range and was_player_detected:
+		if slime_sound and slime_sound.playing:
+			slime_sound.stop()
+			print("Slime: Player left range - stopping sound")
+	
+	# Update tracking variable
+	was_player_detected = player_in_detection_range
+	
 func process_idle():
 	velocity = Vector2.ZERO
 	
@@ -228,10 +246,12 @@ func die():
 	velocity = Vector2.ZERO
 	current_state = State.IDLE
 	
+	if slime_sound and slime_sound.playing:
+		slime_sound.stop()
 	# Hide health bar when dead
 	if healthbar:
 		healthbar.hide()
-	
+	was_player_detected = false
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		var player = players[0]
@@ -270,6 +290,7 @@ func respawn():
 	can_attack = true
 	player_in_detection_range = false
 	player_in_attack_range = false
+	was_player_detected = false
 	
 	# Reset visuals
 	animated_sprite.modulate = Color.WHITE

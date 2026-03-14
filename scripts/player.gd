@@ -371,8 +371,11 @@ func update_quest_progress(amount: int):
 
 func complete_quest():
 	if Global.has_active_quest:
-		var reward = Global.active_quest.get("reward", 0)
-		print("Quest completed! Reward: %d Gold" % reward)
+		var rep_reward = Global.active_quest.get("reputation", 50)  # Default 50 rep
+		
+		# NEW: Give guild reputation
+		if Global.has_taken_test:
+			Global.add_guild_reputation(rep_reward)
 		
 		if quest_ui:
 			quest_ui.complete_quest()

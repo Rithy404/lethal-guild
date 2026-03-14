@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://dqiriqs4hdsvi"]
+[gd_scene load_steps=130 format=3 uid="uid://dqiriqs4hdsvi"]
 
 [ext_resource type="Script" uid="uid://cox01wcrkaw22" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Texture2D" uid="uid://7fhximli3x1j" path="res://assets/Character/FREE_Adventurer 2D Pixel Art/Sprites/ATTACK 2/attack2_right.png" id="2_3v2ag"]
@@ -698,6 +698,17 @@ font_color = Color(0.4265685, 0.2606189, 0.23149166, 1)
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_md1ol"]
+font = ExtResource("20_i4ail")
+font_size = 42
+font_color = Color(0.5568628, 0.6509804, 0, 1)
+outline_size = 1
+outline_color = Color(0, 0.9764706, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bj30b"]
+font = ExtResource("20_i4ail")
+font_color = Color(0.5327563, 0.5326955, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_ke2ow"]
 font_size = 64
 
@@ -752,7 +763,6 @@ scale = Vector2(2.2800007, 2.2800007)
 texture = ExtResource("18_fulsm")
 
 [node name="Quest" type="TextureRect" parent="CanvasLayer"]
-visible = false
 offset_left = 32.0
 offset_top = 130.0
 offset_right = 124.0
@@ -926,6 +936,35 @@ offset_bottom = 286.0
 scale = Vector2(2.5600023, 2.5600023)
 texture_normal = ExtResource("33_2dvfe")
 texture_pressed = ExtResource("34_giy8y")
+
+[node name="GuildRank" type="Label" parent="CanvasLayer/UpgradeUI"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 320.0
+offset_right = 132.0
+offset_bottom = 346.0
+text = "Rank: F"
+label_settings = SubResource("LabelSettings_md1ol")
+
+[node name="Reputation" type="TextureProgressBar" parent="CanvasLayer/UpgradeUI"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 338.0
+offset_right = 223.0
+offset_bottom = 354.0
+scale = Vector2(3.3260953, 0.55999756)
+texture_under = ExtResource("25_pf23h")
+texture_progress = ExtResource("26_dt7fs")
+
+[node name="GuildReputation" type="Label" parent="CanvasLayer/UpgradeUI"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 317.0
+offset_right = 287.0
+offset_bottom = 330.0
+scale = Vector2(1.52, 1.52)
+text = "Guild Reputation"
+label_settings = SubResource("LabelSettings_bj30b")
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
 visible = false

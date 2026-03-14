@@ -1651,15 +1651,15 @@ outline_color = Color(1.0059327e-05, 0.9480954, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aftgb"]
 font = ExtResource("12_goqad")
-font_size = 32
+font_size = 31
 font_color = Color(0, 0, 0, 1)
-outline_size = 2
+outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l3uh5"]
 font = ExtResource("12_goqad")
 font_size = 32
-font_color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+font_color = Color(0.7176471, 0.35686275, 0.37254903, 1)
 
 [node name="Guild" type="Node2D"]
 
@@ -1760,7 +1760,6 @@ volume_db = -2.6
 autoplay = true
 
 [node name="QuestBoardUI" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("9_wse8e")
 
 [node name="BG" type="TextureRect" parent="QuestBoardUI"]
@@ -2001,6 +2000,10 @@ offset_right = 752.0
 offset_bottom = 560.0
 scale = Vector2(3.600005, 3.4615269)
 texture_normal = ExtResource("18_goqad")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="QuestBoardUI"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

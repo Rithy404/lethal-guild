@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://dysh644negkeq"]
+[gd_scene load_steps=65 format=4 uid="uid://dysh644negkeq"]
 
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://couy0dxkwgxnj" path="res://assets/Map/pixel_16_woods v2 free/free_pixel_16_woods.png" id="1_yqjtg"]
@@ -13,6 +13,12 @@
 [ext_resource type="FontFile" uid="uid://p6xjbd8jiyy4" path="res://assets/UI/ThaleahFat.ttf" id="9_trtic"]
 [ext_resource type="Script" uid="uid://dqksdcdtrjt8e" path="res://scripts/testdamage.gd" id="12_dinhu"]
 [ext_resource type="Script" uid="uid://sdtt36k8nyne" path="res://scripts/enterdungeon.gd" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://djci1o54k5138" path="res://scripts/dungeon_floors_UI.gd" id="14_264po"]
+[ext_resource type="Texture2D" uid="uid://brlyjeo0gif4x" path="res://assets/UI/01_TravelBookLite/Sprites/UI_TravelBook_Slot01b.png" id="15_1kice"]
+[ext_resource type="Texture2D" uid="uid://cec8a6otmgd5k" path="res://assets/UI/buttons-global.png" id="16_5newe"]
+[ext_resource type="Texture2D" uid="uid://dsgor8aklgcal" path="res://assets/UI/buttons-global-pressed.png" id="17_37s47"]
+[ext_resource type="Texture2D" uid="uid://cofh5l6x1boee" path="res://assets/UI/Closebuttons-global.png" id="18_bt5mj"]
+[ext_resource type="Texture2D" uid="uid://be6eq25qkv8eg" path="res://assets/UI/close-buttons-global-pressed.png" id="19_e1j6l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -1987,6 +1993,20 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_pl11u"]
+font = ExtResource("9_trtic")
+font_size = 32
+font_color = Color(0.43801087, 0.52162105, 0.9609087, 1)
+outline_size = 19
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bhx41"]
+font = ExtResource("9_trtic")
+font_size = 32
+font_color = Color(0.06666667, 0.078431375, 0.21960784, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Spawn" type="Node2D"]
 
 [node name="TileMapLayer0" type="TileMapLayer" parent="."]
@@ -2233,6 +2253,137 @@ script = ExtResource("13_kvuet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon"]
 shape = SubResource("RectangleShape2D_dinhu")
+
+[node name="DungeonFloors" type="CanvasLayer" parent="."]
+script = ExtResource("14_264po")
+
+[node name="TextureRect" type="TextureRect" parent="DungeonFloors"]
+offset_left = 334.0
+offset_top = 148.0
+offset_right = 374.0
+offset_bottom = 188.0
+scale = Vector2(14.280001, 8.807048)
+texture = ExtResource("15_1kice")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 7.4889817
+offset_top = 4.2857122
+offset_right = 225.48898
+offset_bottom = 34.285713
+scale = Vector2(0.118333995, 0.12087663)
+text = "Dungeon Floors"
+label_settings = SubResource("LabelSettings_pl11u")
+
+[node name="Floor1" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 5.6167374
+offset_top = 11.785713
+offset_right = 20.943733
+offset_bottom = 26.98658
+scale = Vector2(0.30860308, 0.41623726)
+texture_normal = ExtResource("16_5newe")
+texture_pressed = ExtResource("17_37s47")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect/Floor1"]
+layout_mode = 0
+offset_left = 3.9255989
+offset_top = -1.2870419
+offset_right = 13.925599
+offset_bottom = 28.712957
+scale = Vector2(0.4748549, 0.4748549)
+text = "1"
+label_settings = SubResource("LabelSettings_bhx41")
+
+[node name="Floor2" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 11.784139
+offset_top = 11.785713
+offset_right = 27.111135
+offset_bottom = 26.98658
+scale = Vector2(0.30860308, 0.41623726)
+texture_normal = ExtResource("16_5newe")
+texture_pressed = ExtResource("17_37s47")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect/Floor2"]
+layout_mode = 0
+offset_left = 3.9255989
+offset_top = -1.2870419
+offset_right = 13.925599
+offset_bottom = 28.712957
+scale = Vector2(0.4748549, 0.4748549)
+text = "2"
+label_settings = SubResource("LabelSettings_bhx41")
+
+[node name="Floor3" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 17.95154
+offset_top = 11.785712
+offset_right = 33.278538
+offset_bottom = 26.98658
+scale = Vector2(0.30860308, 0.41623726)
+texture_normal = ExtResource("16_5newe")
+texture_pressed = ExtResource("17_37s47")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect/Floor3"]
+layout_mode = 0
+offset_left = 3.9255989
+offset_top = -1.2870419
+offset_right = 13.925599
+offset_bottom = 28.712957
+scale = Vector2(0.4748549, 0.4748549)
+text = "3"
+label_settings = SubResource("LabelSettings_bhx41")
+
+[node name="Floor4" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 24.11894
+offset_top = 11.785713
+offset_right = 39.44594
+offset_bottom = 26.98658
+scale = Vector2(0.30860308, 0.41623726)
+texture_normal = ExtResource("16_5newe")
+texture_pressed = ExtResource("17_37s47")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect/Floor4"]
+layout_mode = 0
+offset_left = 3.9255989
+offset_top = -1.2870419
+offset_right = 13.925599
+offset_bottom = 28.712957
+scale = Vector2(0.4748549, 0.4748549)
+text = "4"
+label_settings = SubResource("LabelSettings_bhx41")
+
+[node name="Floor5" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 30.286343
+offset_top = 11.785712
+offset_right = 45.613342
+offset_bottom = 26.98658
+scale = Vector2(0.30860308, 0.41623726)
+texture_normal = ExtResource("16_5newe")
+texture_pressed = ExtResource("17_37s47")
+
+[node name="Label" type="Label" parent="DungeonFloors/TextureRect/Floor5"]
+layout_mode = 0
+offset_left = 3.9255989
+offset_top = -1.2870419
+offset_right = 13.925599
+offset_bottom = 28.712957
+scale = Vector2(0.4748549, 0.4748549)
+text = "5"
+label_settings = SubResource("LabelSettings_bhx41")
+
+[node name="CloseButton" type="TextureButton" parent="DungeonFloors/TextureRect"]
+layout_mode = 0
+offset_left = 34.471363
+offset_top = 3.0357113
+offset_right = 49.954212
+offset_bottom = 19.429296
+scale = Vector2(0.22259283, 0.22259283)
+texture_normal = ExtResource("18_bt5mj")
+texture_pressed = ExtResource("19_e1j6l")
 
 [connection signal="body_entered" from="Y sort/Dummy/Area2D" to="Y sort/Dummy/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Y sort/Dummy/Area2D" to="Y sort/Dummy/Area2D" method="_on_body_exited"]

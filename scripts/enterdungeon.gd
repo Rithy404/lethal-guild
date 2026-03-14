@@ -4,18 +4,33 @@ var entered = false
 @onready var camera_2d_2: Camera2D = $"../Y sort/Player/Camera2D2"
 @onready var player: CharacterBody2D = $"../Y sort/Player"
 @onready var fade_rect: ColorRect = ColorRect.new()
+@onready var dungeon_floors: CanvasLayer = $"../DungeonFloors"
 
-# NEW: Popup UI
+# Popup UI
 @onready var popup_panel: Panel = Panel.new()
 @onready var popup_label: Label = Label.new()
 var popup_timer: float = 0.0
 var showing_popup: bool = false
 
-@export var target_scene: String = "res://scenes/dungeon_f_1.tscn"
-@export var spawn_offset: Vector2 = Vector2(393, 408)
+# Floor scenes
+var floor_scenes = {
+	1: "res://scenes/dungeon_f_1.tscn",
+	2: "res://scenes/dungeon_f_2.tscn",  # Not created yet
+	3: "res://scenes/dungeon_f_3.tscn",  # Not created yet
+	4: "res://scenes/dungeon_f_4.tscn",  # Not created yet
+	5: "res://scenes/dungeon_f_5.tscn",  # Not created yet
+}
+
+var floor_spawn_positions = {
+	1: Vector2(393, 408),
+	2: Vector2(200, 200),  # Placeholder
+	3: Vector2(200, 200),  # Placeholder
+	4: Vector2(200, 200),  # Placeholder
+	5: Vector2(200, 200),  # Placeholder
+}
 
 func _ready():
-	# Create CanvasLayer for full-screen fade
+	# Create CanvasLayer for fade and popup
 	var canvas_layer = CanvasLayer.new()
 	add_child(canvas_layer)
 	
@@ -27,8 +42,12 @@ func _ready():
 	fade_rect.modulate.a = 0.0
 	canvas_layer.add_child(fade_rect)
 	
-	# NEW: Create popup UI
+	# Setup popup UI
 	setup_popup_ui(canvas_layer)
+	
+	# Connect dungeon floors UI callback
+	if dungeon_floors:
+		dungeon_floors.on_floor_selected = _on_floor_selected
 
 func setup_popup_ui(canvas_layer: CanvasLayer):
 	# Panel background
@@ -57,8 +76,8 @@ func setup_popup_ui(canvas_layer: CanvasLayer):
 
 func create_panel_style() -> StyleBoxFlat:
 	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.1, 0.1, 0.1, 0.95)  # Dark semi-transparent
-	style.border_color = Color(0.8, 0.2, 0.2, 1.0)  # Red border
+	style.bg_color = Color(0.1, 0.1, 0.1, 0.95)
+	style.border_color = Color(0.8, 0.2, 0.2, 1.0)
 	style.border_width_left = 3
 	style.border_width_right = 3
 	style.border_width_top = 3
@@ -90,9 +109,16 @@ func _physics_process(delta):
 	# Check for enter input
 	if entered and Input.is_action_just_pressed("enter"):
 		if Global.has_taken_test:
-			zoom_transition_and_change_scene()
+			# NEW: Show floor selection instead of direct transition
+			show_floor_selection()
 		else:
 			show_popup()
+
+func show_floor_selection():
+	if dungeon_floors:
+		dungeon_floors.show_floor_selection()
+	else:
+		print("Error: DungeonFloors UI not found!")
 
 func show_popup():
 	if not showing_popup:
@@ -106,8 +132,22 @@ func hide_popup():
 	popup_timer = 0.0
 	popup_panel.hide()
 
-func zoom_transition_and_change_scene():
-	# 1. ZOOM toward PLAYER
+# NEW: Called when a floor is selected
+func _on_floor_selected(floor_number: int):
+	print("Entering floor %d..." % floor_number)
+	
+	var target_scene = floor_scenes.get(floor_number, "")
+	var spawn_position = floor_spawn_positions.get(floor_number, Vector2(200, 200))
+	
+	if target_scene.is_empty():
+		print("Error: Floor %d scene not found!" % floor_number)
+		return
+	
+	# Zoom and transition
+	zoom_transition_and_change_scene(target_scene, spawn_position)
+
+func zoom_transition_and_change_scene(target_scene: String, spawn_offset: Vector2):
+	# Zoom toward player
 	var tween = create_tween()
 	tween.set_parallel()
 	tween.tween_property(camera_2d_2, "zoom", Vector2(15.0, 15.0), 0.5)
@@ -120,5 +160,6 @@ func zoom_transition_and_change_scene():
 	fade_tween.tween_property(fade_rect, "modulate:a", 1.0, 0.6)
 	await fade_tween.finished
 	
+	# Change scene
 	Global.spawn_position = spawn_offset
 	get_tree().change_scene_to_file(target_scene)

@@ -65,7 +65,7 @@ func _on_quest_accepted(quest_index: int):
 	print("Quest Title: ", data.get("title", "Unknown"))
 	print("Description: ", data.get("description", "No description available"))
 	print("Difficulty: ", data.get("difficulty", "?"))
-	print("Reward: ", data.get("reward", 0), " XP")
+	print("Reward: ", data.get("rep_reward", 0), " XP")
 	print("Objective: ", data.get("objective", "Unknown"))
 	print("======================\n")
 	var player = get_tree().get_first_node_in_group("player")
@@ -99,7 +99,7 @@ func populate_quests(quest_data: Array):
 			if difficulty_label:
 				difficulty_label.text = "Rank: " + data.get("difficulty", "?")
 			if reward_label:
-				reward_label.text = str(data.get("reward", 0)) + " XP"
+				reward_label.text = "Reward: " + str(data.get("rep_reward", 0)) + " XP"
 			
 			quest.show()
 	# Hide unused quest slots

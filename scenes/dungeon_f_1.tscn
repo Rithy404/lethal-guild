@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://bisutsli22ql1"]
+[gd_scene load_steps=55 format=4 uid="uid://bisutsli22ql1"]
 
 [ext_resource type="Texture2D" uid="uid://c3qv56b1d8hoy" path="res://assets/Map/Top_Down_Adventure_Pack_v.1.0/Dungeon_Tileset.png" id="1_5c8bh"]
 [ext_resource type="PackedScene" uid="uid://dqiriqs4hdsvi" path="res://scenes/player.tscn" id="2_37nl0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dhht03ht1ogy0" path="res://scripts/exitdungeon.gd" id="5_cx8a7"]
 [ext_resource type="Texture2D" uid="uid://dh2iys7vfhldr" path="res://assets/Map/Top_Down_Adventure_Pack_v.1.0/Hud_Ui/Screenshot 2026-02-19 234756.png" id="5_sttok"]
 [ext_resource type="Texture2D" uid="uid://4x5xaot4we4m" path="res://assets/Map/Top_Down_Adventure_Pack_v.1.0/Hud_Ui/health_hud.png" id="6_s5tdp"]
+[ext_resource type="AudioStream" uid="uid://cfsvhudcbcdph" path="res://assets/Music/slime-monster-noises-66776.mp3" id="7_dpxgy"]
 [ext_resource type="Script" uid="uid://bnv0fuhppj0jt" path="res://scripts/fell_off.gd" id="8_s5tdp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d0v8l"]
@@ -647,6 +648,13 @@ scale = Vector2(0.38336617, 0.069417246)
 texture_under = ExtResource("5_sttok")
 texture_progress = ExtResource("6_s5tdp")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
 [node name="Slime2" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(514, 425)
 script = ExtResource("3_d0v8l")
@@ -685,6 +693,13 @@ offset_bottom = 34.0
 scale = Vector2(0.38336617, 0.069417246)
 texture_under = ExtResource("5_sttok")
 texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime2"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
 
 [node name="Slime3" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(202, 425)
@@ -725,6 +740,13 @@ scale = Vector2(0.38336617, 0.069417246)
 texture_under = ExtResource("5_sttok")
 texture_progress = ExtResource("6_s5tdp")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime3"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
 [node name="Slime4" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(367, 477)
 script = ExtResource("3_d0v8l")
@@ -764,6 +786,13 @@ scale = Vector2(0.38336617, 0.069417246)
 texture_under = ExtResource("5_sttok")
 texture_progress = ExtResource("6_s5tdp")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime4"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
 [node name="Slime5" type="CharacterBody2D" parent="Ysort"]
 position = Vector2(450, 474)
 script = ExtResource("3_d0v8l")
@@ -802,6 +831,243 @@ offset_bottom = 34.0
 scale = Vector2(0.38336617, 0.069417246)
 texture_under = ExtResource("5_sttok")
 texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime5"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
+[node name="Slime6" type="CharacterBody2D" parent="Ysort"]
+position = Vector2(392, 546)
+script = ExtResource("3_d0v8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime6"]
+sprite_frames = SubResource("SpriteFrames_5kg1b")
+animation = &"idle_front"
+frame_progress = 0.13928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime6"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_2e6r5")
+
+[node name="DetectionArea" type="Area2D" parent="Ysort/Slime6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime6/DetectionArea"]
+shape = SubResource("CircleShape2D_d0v8l")
+
+[node name="AttackArea" type="Area2D" parent="Ysort/Slime6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime6/AttackArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cx8a7")
+
+[node name="HitboxArea" type="Area2D" parent="Ysort/Slime6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime6/HitboxArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7g0eh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Ysort/Slime6"]
+offset_left = -9.999999
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = 34.0
+scale = Vector2(0.38336617, 0.069417246)
+texture_under = ExtResource("5_sttok")
+texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime6"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
+[node name="Slime7" type="CharacterBody2D" parent="Ysort"]
+position = Vector2(297, 550)
+script = ExtResource("3_d0v8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime7"]
+sprite_frames = SubResource("SpriteFrames_5kg1b")
+animation = &"idle_front"
+frame_progress = 0.13928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime7"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_2e6r5")
+
+[node name="DetectionArea" type="Area2D" parent="Ysort/Slime7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime7/DetectionArea"]
+shape = SubResource("CircleShape2D_d0v8l")
+
+[node name="AttackArea" type="Area2D" parent="Ysort/Slime7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime7/AttackArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cx8a7")
+
+[node name="HitboxArea" type="Area2D" parent="Ysort/Slime7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime7/HitboxArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7g0eh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Ysort/Slime7"]
+offset_left = -9.999999
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = 34.0
+scale = Vector2(0.38336617, 0.069417246)
+texture_under = ExtResource("5_sttok")
+texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime7"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
+[node name="Slime8" type="CharacterBody2D" parent="Ysort"]
+position = Vector2(213, 589)
+script = ExtResource("3_d0v8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime8"]
+sprite_frames = SubResource("SpriteFrames_5kg1b")
+animation = &"idle_front"
+frame_progress = 0.13928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime8"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_2e6r5")
+
+[node name="DetectionArea" type="Area2D" parent="Ysort/Slime8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime8/DetectionArea"]
+shape = SubResource("CircleShape2D_d0v8l")
+
+[node name="AttackArea" type="Area2D" parent="Ysort/Slime8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime8/AttackArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cx8a7")
+
+[node name="HitboxArea" type="Area2D" parent="Ysort/Slime8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime8/HitboxArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7g0eh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Ysort/Slime8"]
+offset_left = -9.999999
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = 34.0
+scale = Vector2(0.38336617, 0.069417246)
+texture_under = ExtResource("5_sttok")
+texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime8"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
+[node name="Slime9" type="CharacterBody2D" parent="Ysort"]
+position = Vector2(552, 521)
+script = ExtResource("3_d0v8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime9"]
+sprite_frames = SubResource("SpriteFrames_5kg1b")
+animation = &"idle_front"
+frame_progress = 0.13928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime9"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_2e6r5")
+
+[node name="DetectionArea" type="Area2D" parent="Ysort/Slime9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime9/DetectionArea"]
+shape = SubResource("CircleShape2D_d0v8l")
+
+[node name="AttackArea" type="Area2D" parent="Ysort/Slime9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime9/AttackArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cx8a7")
+
+[node name="HitboxArea" type="Area2D" parent="Ysort/Slime9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime9/HitboxArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7g0eh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Ysort/Slime9"]
+offset_left = -9.999999
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = 34.0
+scale = Vector2(0.38336617, 0.069417246)
+texture_under = ExtResource("5_sttok")
+texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime9"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
+
+[node name="Slime10" type="CharacterBody2D" parent="Ysort"]
+position = Vector2(485, 605)
+script = ExtResource("3_d0v8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ysort/Slime10"]
+sprite_frames = SubResource("SpriteFrames_5kg1b")
+animation = &"idle_front"
+frame_progress = 0.13928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime10"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_2e6r5")
+
+[node name="DetectionArea" type="Area2D" parent="Ysort/Slime10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime10/DetectionArea"]
+shape = SubResource("CircleShape2D_d0v8l")
+
+[node name="AttackArea" type="Area2D" parent="Ysort/Slime10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime10/AttackArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_cx8a7")
+
+[node name="HitboxArea" type="Area2D" parent="Ysort/Slime10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ysort/Slime10/HitboxArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7g0eh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Ysort/Slime10"]
+offset_left = -9.999999
+offset_top = -6.0
+offset_right = 46.0
+offset_bottom = 34.0
+scale = Vector2(0.38336617, 0.069417246)
+texture_under = ExtResource("5_sttok")
+texture_progress = ExtResource("6_s5tdp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Ysort/Slime10"]
+stream = ExtResource("7_dpxgy")
+volume_db = -12.35
+pitch_scale = 0.95
+autoplay = true
+max_distance = 28.0
 
 [node name="ExitDungeon" type="Area2D" parent="."]
 position = Vector2(392, 393)

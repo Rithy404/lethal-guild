@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func start_test() -> void:
 	test_active = true
-	time_remaining = 30.0
+	time_remaining = 20.0
 	
 	# Move player to spawn point
 	if player_spawn and player_ref:
@@ -51,7 +51,7 @@ func show_test_instructions() -> void:
 	var instructions = [
 		"Alright! Time for your test!",
 		"See that training dummy?",
-		"Defeat it within 30 seconds!",
+		"Defeat it within 20 seconds!",
 		"Show me what you've got!"
 	]
 	dialog_box.start_dialog(instructions, "Emily")
@@ -125,9 +125,10 @@ func assign_rank_f() -> void:
 	if player_ref:
 		Global.player_rank = "F"
 		Global.has_taken_test = true
+		Global.initialize_guild_rank()  # Initialize guild reputation system
 		player_ref.can_move = true
 	
-	print("Player received Rank F!")
+	print("Guild rank initialized: %s" % Global.guild_rank)
 	
 	# Return to guild hall
 	return_to_guild()

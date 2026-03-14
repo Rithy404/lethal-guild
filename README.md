@@ -7,11 +7,14 @@ Start as a weak, talentless adventurer and climb the ranks of a brutal guild by 
 
 ##  Game Overview
 
-- **Genre:** Action RPG / Dungeon Crawler / Roguelite  
-- **Perspective:** 2D Top-Down  
-- **Mode:** Single-player  
-- **Setting:** Medieval fantasy  
-- **Target Audience:** RPG & dungeon crawler fans (Age 13+)
+| Field | Details |
+|-------|---------|
+| **Genre** | Action RPG / Dungeon Crawler / Roguelite |
+| **Perspective** | 2D Top-Down |
+| **Mode** | Single-player |
+| **Setting** | Medieval Fantasy |
+| **Engine** | Godot 4 |
+| **Target Audience** | RPG & Dungeon Crawler fans (Age 13+) |
 
 ---
 
@@ -23,7 +26,7 @@ After years of training with nothing to show for it, he joins the **Adventurersâ
 Restricted to the safest dungeon floors and weakest monsters, he takes on quests to gain experience, reputation, and strength.  
 Each completed quest raises his rank, unlocking deeper dungeon floors filled with deadlier monsters and harsher trials.
 
-**Can a talentless adventurer conquer every floor and rise to S-Rank?**
+> **Can a talentless adventurer conquer every floor and rise to S-Rank?**
 
 ---
 
@@ -45,16 +48,70 @@ The Entrance to The Dungeon
 ![Screenshot 5](screenshot/LG-DungeonEntrance.png)
 
 ## Video of The Game
+Lethal Guild Gameplay Release Version
 
-Gameplay For First Version
+[![Lethal Guild Gameplay](screenshot/LG-MainMenu.png)](https://www.youtube.com/watch?v=t-wGdw07M2I)
 
-[![Lethal Guild Gameplay](https://i9.ytimg.com/vi_webp/GeAe21gAijE/mqdefault.webp?v=6980e307&sqp=CJzFg8wG&rs=AOn4CLCWLeQ_zBz-TKRxdQuqWvvpDfOjew)](https://www.youtube.com/watch?v=GeAe21gAijE)
+Lethal Guild Gameplay Release Version with Explanation
 
-Gameplay For Beta Version
-
-[![Lethal Guild Gameplay](https://i9.ytimg.com/vi_webp/GeAe21gAijE/mqdefault.webp?v=6980e307&sqp=CJzFg8wG&rs=AOn4CLCWLeQ_zBz-TKRxdQuqWvvpDfOjew)](https://www.youtube.com/watch?v=P0n7vn6y3Pk)
+[![Lethal Guild Gameplay](https://img.youtube.com/vi/GeAe21gAijE/0.jpg)](https://www.youtube.com/watch?v=rzXf9bIlmg0)
 
 ---
+## Game Assets
+
+### Characters & Sprites
+
+| Asset | Creator |
+|-------|---------|
+| [Top Down Adventurer Character](https://xzany.itch.io/top-down-adventurer-character) | xzany |
+| [Adventure Pack](https://o-lobster.itch.io/adventure-pack) | o-lobster |
+
+### Tilesets & Environments
+
+| Asset | Creator |
+|-------|---------|
+| [Mystic Woods](https://game-endeavor.itch.io/mystic-woods) | Game Endeavor |
+| [Old Shop Tile Set](https://gabrielatot.itch.io/old-shop-tile-set) | gabrielatot |
+| [Pixel Lands Interiors](https://trislin.itch.io/pixel-lands-interiors) | trislin |
+| [Pixel 16 Woods v2](https://zedpxl.itch.io/pixelart-forest-asset-pack/devlog/923296/pixel-16-woods-v2-released) | zedpxl |
+
+### UI & Icons
+
+| Asset | Creator |
+|-------|---------|
+| [Raven Fantasy Icons](https://clockworkraven.itch.io/raven-fantasy-icons) | ClockworkRaven |
+| [Complete UI Book Styles Pack](https://crusenho.itch.io/complete-ui-book-styles-pack) | crusenho |
+
+### Fonts
+
+| Asset | Creator |
+|-------|---------|
+| [Free Pixel Font â€“ Thaleah](https://tinyworlds.itch.io/free-pixel-font-thaleah) | Tiny Worlds |
+| [Monogram](https://datagoblin.itch.io/monogram) | datagoblin |
+
+### Audio
+
+| Asset | Source |
+|-------|--------|
+| [Medieval Happy Music](https://pixabay.com/music/adventure-medieval-happy-music-412790/) | Pixabay |
+| [Medieval Ambient](https://pixabay.com/music/ambient-medieval-ambient-236809/) | Pixabay |
+| [Slime Monster Sound Effects](https://pixabay.com/sound-effects/horror-slime-monster-noises-66776/) | Pixabay |
+
+
+---
+
+### Installation & Running
+**Prerequisites**
+- [Godot Engine 4.5.x or later](https://godotengine.org/download)
+
+**Clone via Git**
+```bash
+# Clone the repo
+git clone https://github.com/Rithy404/lethal-guild
+
+# Navigate to project folder
+cd lethal-guild
+```
 ## AI Usage
 Claude Prompt:
 - In godot 4 I want to make the player hit a dummy only when its close by and facing the dummy. My idea of implement this is by detect player location and compare it to the dummy location. Example: if the player walk passed it need to face the direction behind him to hit it.
